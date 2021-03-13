@@ -1,0 +1,22 @@
+{
+  "name": "bindr-backend",
+  "version": "1.0.0",
+  "description": "The backend for the Bindr concurrent  and secure notepad application developed by Team 7 for ICSI 499",
+  "main": "centralAuthority.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/James-Oswald/Bindr-Backend.git"
+  },
+  "author": "James-Oswald",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/James-Oswald/Bindr-Backend/issues"
+  },
+  "homepage": "https://github.com/James-Oswald/Bindr-Backend#readme",
+  "dependencies": {
+    "ws": "^7.4.4"
+  }
+}
