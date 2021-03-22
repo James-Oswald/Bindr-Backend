@@ -4,17 +4,41 @@
 
 let WebSocket = require("ws");
 
-const wss = new WebSocket.Server({port: 8080});
+//=============== Application State =========================
+const wss = new WebSocket.Server({port: 8080}); //The websocket Server
 
-wss.on('connection', function connection(ws) {
-    ws.on('message', function incoming(message) {
-        try{
-            let obj = JSON.parse(message);
-            ws.send(JSON.stringify({"c":obj.a+obj.b}));
-        }catch(e){
-            console.log(e.message);
-            ws.send(JSON.stringify({"c":e.message}));
-        }
-    });
-    console.log("recived connection");
-});
+init();
+
+//Initilization function, run at startup
+function init(){
+    wss.on('connection', onConnection);
+}
+
+function onConnection(websocket){
+    websocket.on('message', message=>onMessage(websocket, message));
+    websocket.on('close', (code,reason)=>onClose(websocket, code, reason));
+}
+
+function onMessage(websocket, message){
+    try{
+        dispatch(websocket, message)
+    }catch(e){
+        console.log(e.message);
+    }
+}
+
+function dispatch(websocket, message){
+    try{
+        let obj = JSON.parse(message);
+        websocket.send(JSON.stringify({"retMsg":obj.enc}));
+    }catch(e){
+        console.log(e.message);
+        websocket.send(JSON.stringify({"retMsg":e.message}));
+    }
+}
+
+function onClose(){
+    
+}
+
+
